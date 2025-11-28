@@ -3,7 +3,7 @@ using namespace std;
 
 const int N = 2e5;
 
-vector<int>graph[N];
+vector<int>G[N];
 
 void coloring(int V){
 	vector<int>result(V,-1);
@@ -14,7 +14,7 @@ void coloring(int V){
 	set<int>st;
 
 	for (int u = 1; u < V; u++){
-		for (auto it:graph[u])			if (result[it] != -1)	used[result[it]] = true;
+		for (auto it:G[u])	if (result[it] != -1)	used[result[it]] = true;
 		
 		int color;
 		for (color = 0; color < V; color++)			if (used[color] == false)break;
@@ -23,7 +23,7 @@ void coloring(int V){
 
 		st.insert(color);
 
-		for (auto it:graph[u])			if (result[it] != -1)	used[result[it]] = false;
+		for (auto it:G[u])			if (result[it] != -1)	used[result[it]] = false;
 	}
 	
 	cout<<"Vertex\tColour\n";
@@ -41,8 +41,8 @@ int main()
 	cout<<"Enter the edges: \n";
 	for(int i =0;i<m;i++){
 		int a,b;cin >>a>>b;
-		graph[a].push_back(b);
-		graph[b].push_back(a);
+		G[a].push_back(b);
+		G[b].push_back(a);
 	}
 	
 	coloring(n);
